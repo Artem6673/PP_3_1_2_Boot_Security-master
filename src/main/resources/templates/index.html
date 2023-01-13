@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<div style="float: left; border: 3px solid chocolate; padding: 4px;">
+    <a style="border: 2px solid #6f2920; border-radius: 2px;text-decoration: none;padding: 3px;margin: 4px; width: 100px " href="/admin">Show users</a>
+    <br>
+    <br>
+    <a style="border: 2px solid #6f2920; border-radius: 2px;text-decoration: none;padding: 3px;margin: 4px; width: 100px " href="/admin/new">New user</a>
+    <br>
+    <br>
+
+    <div th:each="user : ${users}">
+        <a th:href="@{/admin/{id}(id=${user.getId()})}" th:text="${user.getName()}+' '+${user.getSurname()}">user</a>
+    </div>
+</div>
+<br>
+<form th:action="@{/logout}" method="post" style="float: right">
+    <input type="submit" value="Logout">
+</form>
+
+
+</body>
+</html>

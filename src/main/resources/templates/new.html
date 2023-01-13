@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>User</title>
+</head>
+<body>
+<div style="float: left; border: 3px solid chocolate; padding: 4px;">
+  <a style="border: 2px solid #6f2920; border-radius: 2px;text-decoration: none;padding: 3px;margin: 4px; width: 100px " href="/admin">Show users</a>
+  <br>
+  <br>
+  <a style="border: 2px solid #6f2920; border-radius: 2px;text-decoration: none;padding: 3px;margin: 4px; width: 100px " href="/admin/new">New user</a>
+  <br>
+  <br>
+
+  <div th:each="user : ${users}">
+    <a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.getName()}">user</a>
+  </div>
+</div>
+<div style="float: left;width: 400px; border: 3px solid chocolate; margin-left: 30px">
+  <form  th:method="POST" th:action="@{/admin}" th:object="${user}">
+    <label for="name">Enter name</label>
+    <input type="text" th:field="*{name}" id="name">
+    <br>
+    <label for="surname" >Enter surname</label>
+    <input type="text" th:field="*{surname}" id="surname">
+    <br>
+    <label for="name" >Enter age</label>
+    <input type="text" th:field="*{age}" id="age">
+    <br>
+    <label for="name" >Enter password</label>
+    <input type="text" th:field="*{password}" id="password">
+    <br>
+    <label for="name" >Enter email</label>
+    <input type="text" th:field="*{email}" id="email">
+    <br>
+    <input type="submit" value="Create!">
+    <div style="color: red" th:filed="*{#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+
+
+
+
+  </form>
+</div>
+<br>
+<form th:action="@{/logout}" method="post" style="float: right">
+  <input type="submit" value="Logout">
+</form>
+
+
+
+
+</body>
+</html>

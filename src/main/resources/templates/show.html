@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>User</title>
+</head>
+<body>
+<div style="float: left; border: 3px solid chocolate; padding: 4px;">
+  <a style="border: 2px solid #6f2920; border-radius: 2px;text-decoration: none;padding: 3px;margin: 4px; width: 100px " href="/admin">Show users</a>
+  <br>
+  <br>
+  <a style="border: 2px solid #6f2920; border-radius: 2px;text-decoration: none;padding: 3px;margin: 4px; width: 100px " href="/admin/new" >New user</a>
+  <br>
+  <br>
+  <a style="border: 2px solid #6f2920; border-radius: 2px;text-decoration: none;padding: 3px;margin: 4px; width: 100px " th:href="@{/admin/{id}/edit (id=${user.getId()})}" href="/users/">Edit</a>
+  <br>
+  <br>
+  <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
+    <input type="submit" value="Delete">
+
+  </form>
+  <br>
+  <br>
+
+  <div th:each="user : ${users}">
+    <a th:href="@{/admin/{id}(id=${user.getId()})}" th:text="${user.getName()}">user</a>
+  </div>
+</div>
+<div style="float: left;width: 300px; border: 3px solid chocolate; margin-left: 30px">
+  <div style="float: left; width:100px;">Id: </div>
+  <div th:text="${user.getId()}"></div>
+  <br>
+  <div style="float: left; width:100px;">Name: </div>
+  <div th:text="${user.getName()}"></div>
+  <br>
+  <div style="float: left; width:100px;">Surname: </div>
+  <div th:text="${user.getSurname()}"></div>
+  <br>
+  <div style="float: left; width:100px;">Age: </div>
+  <div th:text="${user.getAge()}"></div>
+  <br>
+  <div style="float: left; width:100px;">Email: : </div>
+  <div th:text="${user.getEmail()}"></div>
+  <br>
+  <div style="float: left; width:100px;">Role: </div>
+  <div th:text="${user.getRole()}"></div>
+
+
+
+</div>
+<br>
+<form th:action="@{/logout}" method="post" style="float: right">
+  <input type="submit" value="Logout">
+</form>
+
+
+
+</body>
+</html>
