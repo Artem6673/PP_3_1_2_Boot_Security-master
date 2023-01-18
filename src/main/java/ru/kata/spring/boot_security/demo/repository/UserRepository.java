@@ -6,7 +6,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 
 import java.util.Optional;
 @Repository
-public interface PeopleRepository extends JpaRepository<User,Integer> {
+public interface UserRepository extends JpaRepository<User,Long> {
     Optional<User> findByEmail(String username);
 
 

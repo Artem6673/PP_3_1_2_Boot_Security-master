@@ -2,6 +2,10 @@ package ru.kata.spring.boot_security.demo.model;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -20,19 +24,23 @@ public class User {
     private String password;
     @Column
     private String email;
-    @Column
-    private String role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     public User() {
     }
 
-    public User(String name, String surname, int age, String password, String email,String role) {
+    public User(String name, String surname, int age, String password, String email,Set<Role> roles) {
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.password = password;
         this.email = email;
-        this.role = role;
+        this.roles = roles;
     }
 
     public long getId() {
@@ -83,12 +91,12 @@ public class User {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override

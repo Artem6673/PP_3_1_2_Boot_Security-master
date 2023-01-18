@@ -15,11 +15,8 @@
     <br>
     <br>
 
-    <div th:each="user : ${users}">
-        <a th:href="@{/admin/{id}(id=${user.getId()})}" th:text="${user.getName()}">user</a>
-    </div>
 </div>
-<div style="float: left;width: 300px; border: 3px solid chocolate; margin-left: 30px">
+<div style="float: left;width: 400px; border: 3px solid chocolate; margin-left: 30px">
     <form th:method="PATCH" th:action="@{/admin/{id}(id=${user.getId()})}" th:object="${user}">
         <label for="name">Enter name</label>
         <input type="text" th:field="*{name}" id="name">
@@ -27,17 +24,23 @@
         <label for="surname">Enter surname</label>
         <input type="text" th:field="*{surname}" id="surname">
         <br>
-        <label for="name">Enter age</label>
+        <label for="age">Enter age</label>
         <input type="text" th:field="*{age}" id="age">
         <br>
-        <label for="name">Enter password</label>
+        <label for="password">Enter password</label>
         <input type="text" th:field="*{password}" id="password">
         <br>
-        <label for="name">Enter email</label>
+        <label for="email">Enter email</label>
         <input type="text" th:field="*{email}" id="email">
         <br>
-        <label for="name">Enter role</label>
-        <input type="text" th:field="*{role}" id="role">
+        <label>Select role:
+            <input type="checkbox" name="roles"
+                   th:each="role : ${roles}"
+                   th:value="${role.id}"
+                   th:text="${role.getAuthority()}"
+                   th:field="*{roles}"
+            />
+        </label>
         <br>
         <input type="submit" value="Update!">
 
